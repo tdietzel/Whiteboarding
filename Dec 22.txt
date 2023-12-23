@@ -1,0 +1,33 @@
+// compress strings, aaa > 3a
+// input = "aaabccdddda"
+// output = "3ab2c4da"
+
+function compressedString(input) {
+	let string = "";
+  let count = 1;
+
+	for (let i = 0; i < input.length; i++) {
+		if (input[i] === input[i + 1]) {
+			count++;
+		} else {
+			string += (count > 1) ? count + input[i] : input[i];
+			count = 1;
+		}
+	}
+	return string;
+}
+
+function compressStringRecursive(input, index = 0, string = "", count = 1) {
+  if (index === input.length) {
+      string += (count > 1) ? count + input[index - 1] : input[index - 1];
+      return string;
+  }
+
+  if (input[index] === input[index + 1]) {
+    	count++;
+  } 	else {
+      string += (count > 1) ? count + input[index] : input[index];
+      count = 1;
+    }
+    return compressStringRecursive(input, index + 1, string, count);
+}
